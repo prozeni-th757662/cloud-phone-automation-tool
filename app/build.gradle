@@ -1,0 +1,77 @@
+```groovy
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.5.31' // Using a stable Kotlin version for improved performance and compatibility
+    repositories {
+        google() // Google's Maven repository for Android libraries
+        mavenCentral() // Central repository for additional libraries
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.4' // Android Gradle plugin for building applications
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Enables Kotlin support for Android
+    }
+}
+
+// This file is used to define project-wide settings and dependencies
+
+allprojects {
+    repositories {
+        google() // Ensures that Android libraries are accessible
+        mavenCentral() // Access to a wider range of libraries
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+```
+
+```groovy
+// Module-level build.gradle file for the MadHub Cloud Phone Automation Tool
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android' // Enables Kotlin for Android, improving code efficiency and readability
+
+android {
+    compileSdkVersion 31 // Targeting Android SDK version for improved feature access and security
+    defaultConfig {
+        applicationId "com.madhub.cloudphoneautomation" // Unique identifier for the application
+        minSdkVersion 21 // Minimum SDK version to support a wide range of devices
+        targetSdkVersion 31 // Target SDK version to leverage the latest features
+        versionCode 1 // Initial version code for tracking releases
+        versionName "1.0.0" // User-friendly version name for the application
+    }
+    buildTypes {
+        release {
+            minifyEnabled false // Disabling code shrinking for initial development
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' // ProGuard settings for release builds
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version' // Standard library for Kotlin, improving development efficiency
+
+    // Retrofit for network operations
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' // Achieves seamless network calls, enhancing data fetching efficiency
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // Converts JSON responses into Kotlin objects automatically, improving data handling
+
+    // Room for local database operations
+    implementation 'androidx.room:room-runtime:2.4.2' // Increases performance of local data storage with efficient database operations
+    annotationProcessor 'androidx.room:room-compiler:2.4.2' // Enables annotation processing for Room database
+
+    // Dependency for scheduling background tasks
+    implementation 'androidx.work:work-runtime-ktx:2.7.1' // Enhances capabilities by allowing 24/7 automated operations for tasks, pivotal for the cloud phone automation tool
+
+    // Adding Gson for JSON parsing
+    implementation 'com.google.code.gson:gson:2.8.8' // Improves efficiency in parsing and serializing JSON data
+
+    // Additional libraries can be added for enhanced functionality
+}
+
+// This configuration enables a robust and efficient platform for the MadHub Cloud Phone Automation tool, allowing users to manage social media operations seamlessly across platforms like Facebook, Instagram, and TikTok.
+// With strong support for continuous operations on real devices and cloud environments, users can expect high performance and reliable automation.
+``` 
+
+This `build.gradle` file is tailored for the MadHub Cloud Phone Automation Tool, ensuring robust functionality and efficient performance tailored for social media automation. By leveraging modern libraries and adhering to best practices, this setup allows for seamless integration and enhanced user experience.
